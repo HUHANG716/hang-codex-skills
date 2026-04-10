@@ -1,0 +1,4 @@
+interface:
+  display_name: "Officewebsite CMS Bidirectional Sync"
+  short_description: "Bidirectional component and CMS schema sync for officewebsite"
+  default_prompt: "Use $officewebsite-cms-bidirectional-sync to keep an officewebsite component and its CMS schema synchronized in either direction."
