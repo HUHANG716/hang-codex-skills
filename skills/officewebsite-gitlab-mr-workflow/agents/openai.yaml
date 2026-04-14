@@ -1,0 +1,4 @@
+interface:
+  display_name: "officewebsite MR Flow"
+  short_description: "Semantic commits, MR info, and GitLab MR flow"
+  default_prompt: "Use this skill to split staged officewebsite changes into semantic commits, push them, generate a one-theme MR title and description against dev, and create or update the merge request on the self-hosted GitLab."
