@@ -4,6 +4,7 @@
 
 ## Skills
 
+- `gameplay-evolution-review`
 - `officewebsite-cms-bidirectional-sync`
 - `officewebsite-gitlab-mr-workflow`
 
@@ -11,6 +12,7 @@
 
 ```text
 skills/
+  gameplay-evolution-review/
   officewebsite-cms-bidirectional-sync/
   officewebsite-gitlab-mr-workflow/
 ```

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Gameplay Evolution Review"
+  short_description: "Evidence-led game progression review"
+  default_prompt: "Use $gameplay-evolution-review to simulate this game and review its progression from multiple player and operator roles."
