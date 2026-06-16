@@ -32,9 +32,16 @@ Optional helper: `scripts/make_review_plan.py` can generate a first-pass checkli
    - player verbs and constraints
    - key resources, timers, scores, units, cards, levels, encounters, narrative flags, or social states
    - intended audience and skill curve when stated
-4. State the expected arc before looking at fresh results: early learning, first pressure, viable choices, midgame changes, failure routes, success routes, late-game/end-state pressure, and what "healthy" should feel like for this genre.
-5. Run real evolution. Prefer existing commands such as `npm run diagnose`, `npm run simulate`, `npm test`, replay tools, solver scripts, bot matches, automated playtests, telemetry fixtures, or purpose-built scenario runners. If no suitable review tool exists, inspect the game loop and follow `references/review-tool-consent.md` to prepare the consent question before creating any temporary probe, scenario runner, harness, fixture, or durable project file. If the user does not approve tool creation, continue with static or paper review and record the missing runnable evidence in `Gaps`.
-6. Cover scenario classes, not just one happy path. Choose the relevant routes and rename them to match the game:
+4. When balance across strategic archetypes is in scope, recommend a balance intent and confirm it with the user when ambiguous. Strategic archetypes include builds, classes, factions, decks, routes, playstyles, upgrade paths, openings, or economy plans. Do not assume equal win rates are desired. Common balance intents:
+   - competitive parity: similar power bands, matchup fairness, and win-rate spread matter.
+   - viable diversity: multiple strategic archetypes can succeed, but speed, risk, effort, and consistency may differ.
+   - asymmetric fantasy: identity, feel, role, and mastery curve matter more than equal outcomes.
+   - challenge/trap ecology: strong, weak, expert-only, joke, or trap archetypes can exist if their purpose and failure causes are readable.
+   - progression balance: early, mid, and late power spikes differ by design.
+   If the user does not answer, continue with the recommended intent and state the assumption in the report.
+5. State the expected arc before looking at fresh results: early learning, first pressure, viable choices, midgame changes, failure routes, success routes, late-game/end-state pressure, and what "healthy" should feel like for this genre and balance intent.
+6. Run real evolution. Prefer existing commands such as `npm run diagnose`, `npm run simulate`, `npm test`, replay tools, solver scripts, bot matches, automated playtests, telemetry fixtures, or purpose-built scenario runners. If no suitable review tool exists, inspect the game loop and follow `references/review-tool-consent.md` to prepare the consent question before creating any temporary probe, scenario runner, harness, fixture, or durable project file. If the user does not approve tool creation, continue with static or paper review and record the missing runnable evidence in `Gaps`.
+7. Cover scenario classes, not just one happy path. Choose the relevant routes and rename them to match the game:
    - no-action, random, or minimum-skill baseline
    - obvious bad route or misunderstood-player route
    - cautious/safe route
@@ -44,10 +51,10 @@ Optional helper: `scripts/make_review_plan.py` can generate a first-pass checkli
    - exploit, degenerate loop, stall, farming, or infinite-combo route
    - stress route for late-game load, scarce resources, high difficulty, content exhaustion, multiplayer pressure, or many turns/ticks
    If any class is skipped, name the missing route and reason in `Gaps`.
-7. Record phase snapshots, not only the final state. Capture opening, first decision, first failure/success, midgame, late/endgame, peak values, and the exact bottleneck, gate, exploit, or comprehension break blocking progression.
-8. **REQUIRED SUB-SKILL:** Use `playwright` and inspect at least one real browser/play flow when the review scope includes player comprehension, UI feedback, layout, onboarding, or interaction flow. If the browser flow cannot run, record that in `Gaps`; do not replace browser observation with code inference.
-9. Run regression checks after behavior changes or when validating that a review-only pass did not alter behavior. Use commands such as tests, snapshot checks, build checks, replay validation, deterministic seed checks, or golden-output comparisons for this lane.
-10. Review through role lenses, then synthesize into prioritized findings. For high-impact balance or design claims, map the claim to at least one reference lens below and keep observed behavior separate from inferred player psychology. Use `references/severity-rubric.md` for high-priority or multi-issue reports.
+8. Record phase snapshots, not only the final state. Capture opening, first decision, first failure/success, midgame, late/endgame, peak values, and the exact bottleneck, gate, exploit, or comprehension break blocking progression.
+9. **REQUIRED SUB-SKILL:** Use `playwright` and inspect at least one real browser/play flow when the review scope includes player comprehension, UI feedback, layout, onboarding, or interaction flow. If the browser flow cannot run, record that in `Gaps`; do not replace browser observation with code inference.
+10. Run regression checks after behavior changes or when validating that a review-only pass did not alter behavior. Use commands such as tests, snapshot checks, build checks, replay validation, deterministic seed checks, or golden-output comparisons for this lane.
+11. Review through role lenses, then synthesize into prioritized findings. For high-impact balance or design claims, map the claim to at least one reference lens below and keep observed behavior separate from inferred player psychology. Use `references/severity-rubric.md` for high-priority or multi-issue reports.
 
 ## Role Lenses
 
@@ -80,6 +87,7 @@ Use these as compact evaluation rulers; do not let them replace real playtesting
 | UX heuristics | Check visibility, consistency, real-world match, control, and error recovery. | Produce: visible UI state -> true engine state -> next-action clarity. |
 | Difficulty curve | Check whether challenge rises through new decisions, tighter constraints, or deeper mastery. | Produce: phase -> challenge source -> player tool/counterplay -> result. |
 | Dominant strategy analysis | Detect solved play, degenerate loops, farming, stalling, or risk-free rewards. | Produce: strategy -> why it dominates -> cost/risk missing -> tuning lever. |
+| Strategic archetype analysis | Check builds, classes, factions, decks, routes, playstyles, upgrade paths, or economy plans without assuming equal win rates. | Produce: archetype -> role -> viability -> skill floor/ceiling -> counterplay/niche -> balance intent fit. |
 
 ## Game UI/UX Checkpoints
 
@@ -108,6 +116,7 @@ Check these dimensions against evidence:
 - Pacing: early game teaches, midgame varies, late game pressures or resolves without becoming pure repetition.
 - Content variety: encounters, levels, cards, events, units, choices, story beats, or puzzles avoid stale repetition unless that repetition is the intended mastery loop.
 - Agency and fairness: outcomes feel traceable to player choices, skill, luck, hidden information, or authored constraints in the intended proportions.
+- Strategic archetype ecology: builds, classes, factions, decks, routes, playstyles, upgrade paths, or economy plans have clear roles, readable trade-offs, viable niches, and appropriate power bands for the chosen balance intent.
 - Exploitability: one-button loops, dominant builds, infinite resources, farming stalls, softlocks, solved openings, or risk-free strategies are called out.
 - Instrumentation: diagnostics measure phase snapshots, peaks, gates, and bottlenecks.
 - Regression safety: behavior-changing observations are tied to tests, snapshots, or reproducible commands.
@@ -136,13 +145,14 @@ For broader genre-specific checks, consult `references/genre-profiles.md`.
 Keep the report concise and evidence-led:
 
 1. Expected arc: a short hypothesis before results.
-2. Commands run: include exact commands and whether they passed.
-3. Scenario table: use columns that fit the game. Default columns are `Route`, `Duration/Phase`, `Progress/Score/Outcome`, `Key Resources`, `Risk/Failure/Quality`, and `Notable Bottleneck`.
-4. Expected vs observed: note surprising bottlenecks, dominant strategies, missing pressure, or failed hypotheses.
-5. Role review: short bullets by relevant lenses.
-6. Findings: prioritize by player impact. For each high-priority finding, include `Evidence`, `Lens`, `Code path`, `Lever`, and `Expected side effect`; UI/UX findings need browser observation, screenshot, or UI panel evidence when available.
-7. Recommendations: 2-4 tuning paths with trade-offs, not a giant backlog.
-8. Gaps: state what was not verified, missing scenario classes and reasons, browser playtesting gaps, or temporary probes that could not be cleaned up.
+2. Balance intent: state the recommended or user-confirmed balance model when strategic archetypes are in scope.
+3. Commands run: include exact commands and whether they passed.
+4. Scenario table: use columns that fit the game. Default columns are `Route`, `Duration/Phase`, `Progress/Score/Outcome`, `Key Resources`, `Risk/Failure/Quality`, and `Notable Bottleneck`.
+5. Expected vs observed: note surprising bottlenecks, dominant strategies, missing pressure, or failed hypotheses.
+6. Role review: short bullets by relevant lenses.
+7. Findings: prioritize by player impact. For each high-priority finding, include `Evidence`, `Lens`, `Code path`, `Lever`, and `Expected side effect`; UI/UX findings need browser observation, screenshot, or UI panel evidence when available.
+8. Recommendations: 2-4 tuning paths with trade-offs, not a giant backlog.
+9. Gaps: state what was not verified, missing scenario classes and reasons, browser playtesting gaps, or temporary probes that could not be cleaned up.
 
 Use `references/evidence-templates.md` when a table would clarify route comparison, phase snapshots, tuning before/after, UI truth, exploit reproduction, or multi-seed variance.
 
@@ -180,6 +190,7 @@ Infer local defaults from the repository before reviewing:
 - Do not review only from intuition; run or inspect the actual system.
 - Do not treat the final state as the whole journey; phase snapshots matter.
 - Do not judge balance from only the intended route; compare low-skill, cautious, risky, optimized, exploit, and stress routes where relevant.
+- Do not assume every strategic archetype should have equal win rate, speed, safety, or accessibility; confirm or state the intended balance model first.
 - Do not invent hidden mechanics; trace code paths for gates, failures, and metrics.
 - Do not report a finding without a source: cite a script, command output, function, data constant, state field, or UI panel when the repo makes that possible.
 - Do not suggest tuning without naming the lever and expected side effect.

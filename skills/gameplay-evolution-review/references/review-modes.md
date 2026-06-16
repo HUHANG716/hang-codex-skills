@@ -33,8 +33,11 @@ Use when the request includes comprehension, onboarding, UI feedback, layout, co
 
 Use when asked whether numbers, difficulty, rewards, or routes feel fair.
 
+- Recommend a balance intent before judging strategic archetypes, then confirm it with the user when ambiguous. Use `competitive parity`, `viable diversity`, `asymmetric fantasy`, `challenge/trap ecology`, or `progression balance` as compact labels.
+- Treat strategic archetypes as builds, classes, factions, decks, routes, playstyles, upgrade paths, openings, or economy plans. Equal win rates are only a target when the chosen balance intent says they are.
 - Identify the explicit tuning levers: constants, tables, formulas, cooldowns, spawn rates, rewards, costs, enemy stats, timers, score thresholds, or content weights.
 - Compare intended, cautious, risky, optimized, and exploit routes.
+- Evaluate role, viability, skill floor, skill ceiling, risk/reward, counterplay, matchup spread, situational niche, and failure readability.
 - For stochastic games, use multiple seeds or repeated runs before calling a balance issue.
 - For each recommendation, name the expected side effect.
 

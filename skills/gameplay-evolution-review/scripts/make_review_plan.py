@@ -26,6 +26,14 @@ MODE_KEYWORDS = [
     ("Full Evolution Review", ["progression", "long-run", "pacing", "evolution", "replay"]),
 ]
 
+BALANCE_KEYWORDS = {
+    "competitive parity": ["pvp", "ranked", "competitive", "matchmaking", "win rate", "win-rate", "fair"],
+    "viable diversity": ["build", "class", "deck", "faction", "route", "strategy", "archetype", "playstyle"],
+    "asymmetric fantasy": ["asymmetric", "fantasy", "role", "identity", "feel", "character"],
+    "challenge/trap ecology": ["hardcore", "trap", "challenge", "expert", "joke", "punishing"],
+    "progression balance": ["progression", "unlock", "early", "midgame", "late", "power spike"],
+}
+
 
 def score_labels(text: str, labels: dict[str, list[str]] | list[tuple[str, list[str]]]) -> list[str]:
     normalized = text.lower()
@@ -54,6 +62,7 @@ def main() -> None:
     brief = " ".join(args.brief).strip() or "No brief provided."
     modes = score_labels(brief, MODE_KEYWORDS) or ["Quick Sanity Review"]
     genres = score_labels(brief, GENRE_KEYWORDS) or ["unknown/hybrid"]
+    balance_intents = score_labels(brief, BALANCE_KEYWORDS) or ["viable diversity"]
 
     print("# Gameplay Review Plan")
     print()
@@ -63,6 +72,11 @@ def main() -> None:
     if len(modes) > 1:
         print(f"Secondary modes: {', '.join(modes[1:])}")
     print(f"Likely genre profile: {genres[0]}")
+    print(f"Recommended balance intent: {balance_intents[0]}")
+    print()
+    print("Balance intent check:")
+    print("- recommend the balance model, then confirm with the user when ambiguous")
+    print("- do not assume equal win rates unless competitive parity is the confirmed intent")
     print()
     print("Scenario classes to consider:")
     print("- low-skill or misunderstood-player route")
@@ -74,6 +88,7 @@ def main() -> None:
     print("- runnable commands, seeds, replays, or manual paper-simulation notes")
     print("- phase snapshots from opening through late/end state")
     print("- route comparison table using the game's own resource names")
+    print("- strategic archetype ecology table when builds/classes/decks/routes/playstyles matter")
     print("- UI truth table when player comprehension is in scope")
     print()
     print("Report gates:")
