@@ -63,3 +63,14 @@ Use when the game cannot run, is only described in docs, or exists as rules/data
 - Audit state transitions, tables, formulas, content, and UI copy.
 - Mark all claims that are inference rather than observed runtime behavior.
 - Put missing runnable evidence in `Gaps`.
+
+## No Runner Consent Gate
+
+Use when the project has a game loop or rules code but no diagnostic, simulation, replay, seed, bot, or scenario runner.
+
+- Use `references/review-tool-consent.md` for the consent prompt template and approval/decline behavior.
+- Inspect enough code to know whether a useful harness can call existing logic.
+- Ask the user before creating any temporary probe, scenario runner, fixture, test, or durable script.
+- State what would be created, where it would live, which existing logic it would call, which scenarios it would cover, and whether it will be deleted or kept.
+- If approved, create the smallest harness that uses existing rules; do not reimplement rules in the harness.
+- If not approved, continue with static or paper review and mark missing runnable evidence in `Gaps`.

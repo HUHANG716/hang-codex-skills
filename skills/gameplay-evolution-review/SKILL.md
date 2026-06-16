@@ -17,6 +17,7 @@ Use references selectively:
 - `references/genre-profiles.md` when adapting scenarios and metrics to a game type.
 - `references/severity-rubric.md` when prioritizing findings.
 - `references/evidence-templates.md` when shaping scenario tables, phase snapshots, before/after tuning, UI truth checks, exploit reproduction, or multi-seed comparisons.
+- `references/review-tool-consent.md` when no runnable review tool exists and creating a probe, harness, fixture, test, or durable script would improve evidence.
 - `references/studio-workflow-notes.md` for larger reviews that benefit from lightweight studio-style passes.
 
 Optional helper: `scripts/make_review_plan.py` can generate a first-pass checklist from a short brief. Use it as planning scaffolding only; it does not replace reading the project, running the game, or collecting evidence.
@@ -32,7 +33,7 @@ Optional helper: `scripts/make_review_plan.py` can generate a first-pass checkli
    - key resources, timers, scores, units, cards, levels, encounters, narrative flags, or social states
    - intended audience and skill curve when stated
 4. State the expected arc before looking at fresh results: early learning, first pressure, viable choices, midgame changes, failure routes, success routes, late-game/end-state pressure, and what "healthy" should feel like for this genre.
-5. Run real evolution. Prefer existing commands such as `npm run diagnose`, `npm run simulate`, `npm test`, replay tools, solver scripts, bot matches, automated playtests, telemetry fixtures, or purpose-built scenario runners. If no tool exists, inspect the game loop and create only a throwaway local probe when necessary; keep probes in `/tmp` or another clearly temporary path, do not update baselines from probes, and delete or disclose any leftovers.
+5. Run real evolution. Prefer existing commands such as `npm run diagnose`, `npm run simulate`, `npm test`, replay tools, solver scripts, bot matches, automated playtests, telemetry fixtures, or purpose-built scenario runners. If no suitable review tool exists, inspect the game loop and follow `references/review-tool-consent.md` to prepare the consent question before creating any temporary probe, scenario runner, harness, fixture, or durable project file. If the user does not approve tool creation, continue with static or paper review and record the missing runnable evidence in `Gaps`.
 6. Cover scenario classes, not just one happy path. Choose the relevant routes and rename them to match the game:
    - no-action, random, or minimum-skill baseline
    - obvious bad route or misunderstood-player route
@@ -156,6 +157,12 @@ If the game cannot run or no executable flow exists:
 - Do not present static inference as playtest evidence.
 
 See `references/review-modes.md` for `Static Or Paper Review`.
+
+## Consent Before Creating Review Tools
+
+When no diagnostic, simulation, replay, seed, bot, or scenario runner exists, do not create one without explicit user approval.
+
+Use `references/review-tool-consent.md` for the consent boundary, prompt template, approval/decline behavior, and durable tooling bar.
 
 ## Project-Specific Adaptation
 

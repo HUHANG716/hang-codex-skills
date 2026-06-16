@@ -19,7 +19,7 @@ GENRE_KEYWORDS = {
 }
 
 MODE_KEYWORDS = [
-    ("Regression Validation", ["regression", "verify", "after change", "before after"]),
+    ("Regression Validation", ["regression", "verify", "compare", "changed", "before after"]),
     ("Exploit Hunt", ["exploit", "cheese", "dominant", "infinite", "softlock", "farm"]),
     ("Balance And Tuning Review", ["balance", "tune", "difficulty", "numbers", "economy"]),
     ("UX And FTUE Review", ["ui", "ux", "onboarding", "tutorial", "feedback", "confusing"]),
@@ -29,6 +29,7 @@ MODE_KEYWORDS = [
 
 def score_labels(text: str, labels: dict[str, list[str]] | list[tuple[str, list[str]]]) -> list[str]:
     normalized = text.lower()
+    normalized = re.sub(r"(?<=\w)[/-](?=\w)", " ", normalized)
     hits: list[tuple[int, int, str]] = []
     iterable = labels.items() if isinstance(labels, dict) else enumerate(labels)
     for index_or_label, value in iterable:
