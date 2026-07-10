@@ -2,6 +2,8 @@
 
 Use this reference whenever generating or revising a CMS form JSON Schema for `officewebsite`.
 
+The schema is an editor contract, not a mirror of every runtime property. Never expose `templateType` in the editor form.
+
 ## Supported Formats
 
 ### 1. `select-search`
@@ -94,6 +96,8 @@ Rules:
 ### 6. `richtext`
 
 Use for longer copy or any text likely to need manual line breaks.
+
+If manual line breaks, mixed emphasis, or multi-paragraph editing are likely, prefer `richtext` even when the old field was a plain string.
 
 ```json
 {

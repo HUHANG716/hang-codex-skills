@@ -1,6 +1,6 @@
 ---
 name: officewebsite-cms-bidirectional-sync
-description: Bidirectionally synchronize `officewebsite` components and CMS JSON Schema contracts. Use when a user wants to评估组件哪些字段适合开放给 CMS、根据组件生成或修订表单 schema、把组件改成从 schema 读取配置、根据 schema 反向修改组件实现，或在组件代码与 CMS 配置之间做双向同步并保持向前兼容。
+description: Use when working in `officewebsite` and a component, CMS form JSON Schema, or CMS configuration must be evaluated, generated, wired, repaired, or synchronized in either direction.
 ---
 
 # Officewebsite CMS Bidirectional Sync
@@ -29,6 +29,19 @@ Use this path when the user starts from JSON Schema or a field contract, for exa
 ### Drift Fix / Full Sync
 
 Use this path when component code and schema have already diverged and the user wants both sides aligned in one pass.
+
+### Component Configuration Review
+
+Use this focused path when the request is specifically about deciding which fields should be exposed to editors or drafting a form schema before implementation:
+
+- Group fields into content, selectors, media, links, layout/style tokens, and repeated items.
+- Prefer editor-facing concepts such as `backgroundColor`, `textColor`, `buttonTheme`, `overlayOpacity`, `contentAlign`, and `showMask`.
+- Avoid one-off font sizes, per-edge spacing, absolute positioning, and decorative micro-controls.
+- Use `richtext` when copy needs manual line breaks or mixed emphasis.
+- Order schema properties for editor usability: titles, selectors/enums, content, media/files, auxiliary fields, then arrays.
+- Always omit `templateType` from the editor form schema.
+
+Start with the schema proposal when the user asks for field evaluation or JSON only. Implement the component wiring only after the contract is accepted, unless the user explicitly requests a full sync.
 
 ## Workflow
 
